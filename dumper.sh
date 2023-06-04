@@ -828,12 +828,12 @@ for p in $PARTITIONS; do
 						rm -fv "$p".img > /dev/null 2>&1
 					else
 						echo "Couldn't extract $p partition by fsck.erofs. Using mount loop"
-						sudo mount -o loop -t auto "$p".img "$p"
+						mount -o loop -t auto "$p".img "$p"
 						mkdir "${p}_"
-						sudo cp -rf "${p}/"* "${p}_"
-						sudo umount "${p}"
-						sudo cp -rf "${p}_/"* "${p}"
-						sudo rm -rf "${p}_"
+						cp -rf "${p}/"* "${p}_"
+						umount "${p}"
+						cp -rf "${p}_/"* "${p}"
+						rm -rf "${p}_"
 						if [ $? -eq 0 ]; then
 							rm -fv "$p".img > /dev/null 2>&1
 						else
